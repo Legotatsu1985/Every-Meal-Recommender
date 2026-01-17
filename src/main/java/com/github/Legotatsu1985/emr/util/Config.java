@@ -22,7 +22,7 @@ public class Config {
             try {
                 Files.createFile(CFG_PATH);
                 PropertyManager.save("lang", "en");
-                PropertyManager.save("apiKey", "SET_YOUR_API_KEY_HERE");
+                PropertyManager.save("apiKey", "");
                 PropertyManager.save("windowStyle", 0);
             } catch (IOException e) {
                 throw new RuntimeException(e);
