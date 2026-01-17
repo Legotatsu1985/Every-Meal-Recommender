@@ -13,9 +13,13 @@ public class Gemini {
     private ChatModel model;
 
     public Gemini() {
-        if (Files.exists(Config.CFG_PATH) && !App.CFG.getApiKey().isEmpty()) {
-            this.apiKey = App.CFG.getApiKey();
-            setModel();
+        if (Files.exists(Config.CFG_PATH)) {
+            if (!App.CFG.getApiKey().isBlank()) {
+                this.apiKey = App.CFG.getApiKey();
+                setModel();
+            } else {
+                throw new RuntimeException("API key is not set in " + Config.CFG_PATH);
+            }
         } else {
             throw new RuntimeException(Config.CFG_PATH + " does not exist");
         }
