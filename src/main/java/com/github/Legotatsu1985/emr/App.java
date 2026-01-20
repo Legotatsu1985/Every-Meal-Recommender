@@ -10,6 +10,8 @@ public class App {
         CFG = new Config(); // Load app configuration
 
         Recipe recipe = new Recipe();
-        recipe.setIngredients("egg", "bread", "mayonnaise").suggest();
+        recipe.setIngredients("egg", "bread", "mayonnaise", "ketchup").suggest();
+        recipe.setRecipeInfo();
+        recipe.printResponseRaw();
     }
 }
