@@ -42,7 +42,5 @@ public class Gemini {
                 .build();
     }
 
-    public String ask(@NotNull String question) {
-        return this.model.chat(question);
-    }
+    public String ask(@NotNull String question) {return this.model.chat(question);}
 }
