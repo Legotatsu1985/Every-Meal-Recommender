@@ -13,6 +13,7 @@ public class Recipe {
     // AI model
     private Gemini gemini;
     private ResponseFormat responseFormat;
+    private String responseRaw;
 
     // Recipe data
     private ArrayList<String> requestedIngredients;
