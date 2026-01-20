@@ -16,7 +16,7 @@ public class Gemini {
 
     public Gemini(@NotNull ResponseFormat responseFormat) {
         if (Files.exists(Config.CFG_PATH)) {
-            if (!App.CFG.getApiKey().isBlank()) {
+            if (!(App.CFG.getApiKey() == null)) {
                 this.apiKey = App.CFG.getApiKey();
                 this.responseFormat = responseFormat;
                 setModel();
