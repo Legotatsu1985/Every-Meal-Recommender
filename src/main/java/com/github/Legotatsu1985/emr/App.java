@@ -1,16 +1,15 @@
 package com.github.Legotatsu1985.emr;
 
-import com.github.Legotatsu1985.emr.ai.Gemini;
+import com.github.Legotatsu1985.emr.meal.Recipe;
 import com.github.Legotatsu1985.emr.util.Config;
 
 public class App {
     public static Config CFG;
 
     static void main() {
-        CFG = new Config();
+        CFG = new Config(); // Load app configuration
 
-
-        Gemini gemini = new Gemini();
-        System.out.println(gemini.ask("Hello world!"));
+        Recipe recipe = new Recipe();
+        recipe.setIngredients("egg", "bread", "mayonnaise").suggest();
     }
 }
