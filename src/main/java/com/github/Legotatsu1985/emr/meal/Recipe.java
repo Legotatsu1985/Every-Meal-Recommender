@@ -1,12 +1,9 @@
 package com.github.Legotatsu1985.emr.meal;
 
 import com.github.Legotatsu1985.emr.ai.Gemini;
-import dev.langchain4j.model.chat.request.ResponseFormat;
-import dev.langchain4j.model.chat.request.ResponseFormatType;
-import dev.langchain4j.model.chat.request.json.JsonArraySchema;
-import dev.langchain4j.model.chat.request.json.JsonObjectSchema;
-import dev.langchain4j.model.chat.request.json.JsonSchema;
-import org.jetbrains.annotations.NotNull;
+import dev.langchain4j.model.chat.request.*;
+import dev.langchain4j.model.chat.request.json.*;
+import org.jetbrains.annotations.*;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
