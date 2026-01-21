@@ -101,4 +101,10 @@ public class Recipe {
                         .build())
                 .build();
     }
+
+    public String getTitle() {return this.title;}
+    public int getCookingTimeMinutes() {return this.cookingTimeMinutes;}
+    public Map<String, Integer> getIngredients() {return this.ingredients;}
+    public LinkedList<String> getSteps() {return this.steps;}
+    public int getCalories() {return this.calories;}
 }
