@@ -24,7 +24,8 @@ public class Recipe {
     private LinkedList<String> steps;
     private int calories;
 
-
+    private static final String QUESTION_TEMPLATE = "Suggest a recipe using the following ingredients: %s. " +
+            "Provide the recipe title, cooking time in minutes, list of ingredients, steps, and total calories in JSON format.";
 
     public Recipe() {
         this.requestedIngredients = new ArrayList<>();
@@ -40,9 +41,7 @@ public class Recipe {
     public void suggest() {
         this.setResponseFormat();
         this.gemini = new Gemini(this.responseFormat);
-        String question = String.format("Suggest a recipe using the following ingredients: %s. " +
-                "Provide the recipe title, cooking time in minutes, list of ingredients, steps, and total calories in JSON format.",
-                String.join(", ", this.requestedIngredients));
+        String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
         this.responseRaw = this.gemini.ask(question);
         ObjectMapper mapper = new ObjectMapper();
         this.responseRoot = mapper.readTree(this.responseRaw);
