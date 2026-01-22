@@ -19,24 +19,32 @@ public class Setting extends JDialog implements Actions {
             "IntelliJ",
             "Darcula"
     };
-    private JPanel mainPanel;
+    private JTabbedPane mainTabbedPane;
+    private JPanel generalPanel;
+    private JPanel geminiPanel;
     private JComboBox<String> langComboBox;
     private JComboBox<String> styleComboBox;
     private JLabel langLabel;
     private JLabel styleLabel;
+    private JLabel apiKeyLabel;
+    private JTextField apiKeyField;
     private JButton saveButton;
 
     public Setting() {
         super((JFrame) null, "Settings", true);
         this.setSize(400, 300);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         build();
         setActionListeners();
     }
 
     private void build() {
-        this.mainPanel = new JPanel();
-        this.mainPanel.setLayout(null);
+        this.generalPanel = new JPanel();
+        this.generalPanel.setLayout(null);
+
+        this.geminiPanel = new JPanel();
+        this.geminiPanel.setLayout(null);
 
         this.langLabel = new JLabel("Language");
         this.langLabel.setBounds(10, 10, 100, 30);
@@ -53,12 +61,26 @@ public class Setting extends JDialog implements Actions {
         this.saveButton = new JButton("Save & Close");
         this.saveButton.setBounds(150, 200, 100, 30);
 
-        this.mainPanel.add(this.langLabel);
-        this.mainPanel.add(this.langComboBox);
-        this.mainPanel.add(this.styleLabel);
-        this.mainPanel.add(this.styleComboBox);
-        this.mainPanel.add(this.saveButton);
-        this.add(this.mainPanel);
+        this.apiKeyLabel = new JLabel("API Key");
+        this.apiKeyLabel.setBounds(10, 10, 100, 30);
+
+        this.apiKeyField = new JTextField();
+        this.apiKeyField.setBounds(110, 10, 270, 30);
+        this.apiKeyField.setText(App.CFG.getApiKey());
+
+        this.generalPanel.add(this.langLabel);
+        this.generalPanel.add(this.langComboBox);
+        this.generalPanel.add(this.styleLabel);
+        this.generalPanel.add(this.styleComboBox);
+        this.geminiPanel.add(this.apiKeyLabel);
+        this.geminiPanel.add(this.apiKeyField);
+
+        this.mainTabbedPane = new JTabbedPane();
+        this.mainTabbedPane.add("General", this.generalPanel);
+        this.mainTabbedPane.add("Gemini", this.geminiPanel);
+
+        getContentPane().add(this.mainTabbedPane, BorderLayout.CENTER);
+        getContentPane().add(this.saveButton, BorderLayout.SOUTH);
     }
 
     public void setActionListeners() {
@@ -66,8 +88,10 @@ public class Setting extends JDialog implements Actions {
             int selectedLangIndex = this.langComboBox.getSelectedIndex();
             int selectedStyleIndex = this.styleComboBox.getSelectedIndex();
             String selectedLangCode = LANG_CODES[selectedLangIndex];
+            String enteredApiKey = this.apiKeyField.getText().trim();
             App.CFG.saveLangCode(selectedLangCode);
             App.CFG.saveWindowStyle(selectedStyleIndex);
+            App.CFG.saveApiKey(enteredApiKey);
             App.updateLookAndFeel();
             this.dispose();
         });
