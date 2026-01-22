@@ -23,6 +23,8 @@ public class Home extends JFrame implements Actions {
         this.mainPanel = new JPanel();
         this.menuBar = new HomeMenuBar();
 
+        // Memo: Using JList for displaying requested ingredients. Addition and removal of ingredients can be done via context menu.
+
         // Set layout and add components
         this.setJMenuBar(this.menuBar);
         this.add(this.mainPanel);
