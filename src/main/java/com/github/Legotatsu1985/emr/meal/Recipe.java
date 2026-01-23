@@ -50,6 +50,7 @@ public class Recipe {
         this.responseRaw = this.gemini.ask(question);
         ObjectMapper mapper = new ObjectMapper();
         this.responseRoot = mapper.readTree(this.responseRaw);
+        this.setRecipeInfo();
     }
 
     public void printResponseRaw() {
@@ -60,7 +61,7 @@ public class Recipe {
         }
     }
 
-    public void setRecipeInfo() {
+    private void setRecipeInfo() {
         if (this.responseRoot != null) {
             // Set Nodes
             JsonNode ingredients = this.responseRoot.path("ingredients");
