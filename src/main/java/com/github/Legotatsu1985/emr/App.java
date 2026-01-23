@@ -12,13 +12,6 @@ public class App {
     static void main() {
         CFG = new Config(); // Load app configuration
 
-        /*
-        Recipe recipe = new Recipe();
-        recipe.setIngredients("egg", "bread", "mayonnaise", "ketchup").suggest();
-        recipe.setRecipeInfo();
-        recipe.printResponseRaw();
-         */
-
         try {
             UIManager.setLookAndFeel(CFG.getWindowStyle());
         } catch (UnsupportedLookAndFeelException e) {
