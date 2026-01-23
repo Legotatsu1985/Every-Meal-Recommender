@@ -1,10 +1,12 @@
 package com.github.Legotatsu1985.emr.ui.frame;
 
+import com.github.Legotatsu1985.emr.meal.Recipe;
 import com.github.Legotatsu1985.emr.ui.Actions;
 import com.github.Legotatsu1985.emr.ui.component.HomeMenuBar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Home extends JFrame implements Actions {
     private JPanel basePanel;
@@ -20,6 +22,8 @@ public class Home extends JFrame implements Actions {
     private JButton suggestRecipeButton; // Only enabled when at least one ingredient is in the list.
 
     private JLabel resultTempLabel;
+
+    private Recipe suggestedRecipe;
 
     public Home() {
         super("Every Meal Recommender");
@@ -41,13 +45,13 @@ public class Home extends JFrame implements Actions {
         this.resultPanel.setLayout(null);
         this.resultPanel.setBounds(390, 10, 390, 540);
         this.resultPanel.setBackground(Color.ORANGE);
-        this.resultPanel.setEnabled(false);
+        this.resultPanel.setVisible(false);
 
         this.resultTempLabel = new JLabel("RESULT");
         this.resultTempLabel.setBounds(140, 260, 100, 30);
         this.resultTempLabel.setForeground(Color.BLACK);
         this.resultTempLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        this.resultTempLabel.setEnabled(false);
+        this.resultTempLabel.setVisible(false);
 
         // Menu Bar
         this.menuBar = new HomeMenuBar();
@@ -133,6 +137,15 @@ public class Home extends JFrame implements Actions {
     private void clearIngredients() {
         this.ingredientListModel.clear();
         updateAllButtonStates();
+    }
+
+    private void suggestRecipe() {
+        ArrayList<String> ingredients = new ArrayList<>();
+        for (int i = 0; i < this.ingredientListModel.getSize(); i++) {
+            ingredients.add(this.ingredientListModel.getElementAt(i));
+        }
+        this.suggestedRecipe = new Recipe();
+        this.suggestedRecipe.setIngredients(ingredients).suggest();
     }
 
     private void setRemoveIngredientButtonState() {this.removeIngredientButton.setEnabled(!this.ingredientList.isSelectionEmpty());}
