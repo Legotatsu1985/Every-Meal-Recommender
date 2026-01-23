@@ -38,6 +38,11 @@ public class Recipe {
         return this;
     }
 
+    public Recipe setIngredients(@NotNull List<String> ingredients) {
+        this.requestedIngredients.addAll(ingredients);
+        return this;
+    }
+
     public void suggest() {
         this.setResponseFormat();
         this.gemini = new Gemini(this.responseFormat);
