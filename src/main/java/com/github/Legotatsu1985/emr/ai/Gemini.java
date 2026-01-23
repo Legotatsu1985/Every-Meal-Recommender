@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Files;
 
 public class Gemini {
+    private static final String DEFAULT_MODEL_NAME = "gemini-2.5-flash";
     private String apiKey;
     private ChatModel model;
     private ResponseFormat responseFormat;
@@ -37,7 +38,7 @@ public class Gemini {
     private void setModel() {
         this.model = GoogleAiGeminiChatModel.builder()
                 .apiKey(this.apiKey)
-                .modelName("gemini-2.5-flash")
+                .modelName(DEFAULT_MODEL_NAME)
                 .responseFormat(this.responseFormat != null ? this.responseFormat : ResponseFormat.TEXT)
                 .build();
     }
