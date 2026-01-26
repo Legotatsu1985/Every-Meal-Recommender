@@ -2,11 +2,14 @@ package com.github.Legotatsu1985.emr;
 
 import com.github.Legotatsu1985.emr.ui.frame.*;
 import com.github.Legotatsu1985.emr.util.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class App {
+    public static final Logger LOGGER = LoggerFactory.getLogger(App.class);
     public static Config CFG;
 
     static void main() {
@@ -15,7 +18,7 @@ public class App {
         try {
             UIManager.setLookAndFeel(CFG.getWindowStyle());
         } catch (UnsupportedLookAndFeelException e) {
-            System.err.println("Failed to set LookAndFeel: " + e.getMessage());
+            LOGGER.error("Failed to set LookAndFeel: {}", e.getMessage());
         }
 
         SwingUtilities.invokeLater(() -> {
@@ -36,7 +39,7 @@ public class App {
                 SwingUtilities.updateComponentTreeUI(window);
             }
         } catch (UnsupportedLookAndFeelException e) {
-            System.err.println("Failed to update LookAndFeel: " + e.getMessage());
+            LOGGER.error("Failed to update LookAndFeel: {}", e.getMessage());
         }
     }
 }

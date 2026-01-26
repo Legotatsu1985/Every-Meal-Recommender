@@ -110,7 +110,7 @@ public class SuggestionPanel extends JPanel implements Actions {
             ingredients.add(this.ingredientListModel.getElementAt(i));
         }
         this.suggestedRecipe = new Recipe();
-        // this.suggestedRecipe.setIngredients(ingredients).suggest();
+        this.suggestedRecipe.setIngredients(ingredients).suggest();
         setSuggestedRecipe();
     }
 

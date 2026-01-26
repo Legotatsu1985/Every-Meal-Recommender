@@ -1,6 +1,7 @@
 package com.github.Legotatsu1985.emr.util;
 
 import com.formdev.flatlaf.*;
+import com.github.Legotatsu1985.emr.App;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -29,9 +30,9 @@ public class Config {
             }
             return;
         }
-        this.langCode = PropertyManager.getString("lang");
-        this.apiKey = PropertyManager.getString("apiKey");
-        this.windowStyle = PropertyManager.getInt("windowStyle");
+        this.langCode = PropertyManager.getString("lang"); App.LOGGER.info("Lang Code = {}", this.langCode);
+        this.apiKey = PropertyManager.getString("apiKey"); App.LOGGER.info("API Key = {}", this.apiKey);
+        this.windowStyle = PropertyManager.getInt("windowStyle"); App.LOGGER.info("Window Style = {}", this.windowStyle);
     }
 
     public String getLangCode() {return this.langCode;}

@@ -22,10 +22,10 @@ public class Gemini {
                 this.responseFormat = responseFormat;
                 setModel();
             } else {
-                throw new RuntimeException("API key is not set in " + Config.CFG_PATH);
+                App.LOGGER.warn("API key is missing in the configuration file.");
             }
         } else {
-            throw new RuntimeException(Config.CFG_PATH + " does not exist");
+            App.LOGGER.warn("The configuration file does not exist.");
         }
     }
 
@@ -41,7 +41,15 @@ public class Gemini {
                 .modelName(DEFAULT_MODEL_NAME)
                 .responseFormat(this.responseFormat != null ? this.responseFormat : ResponseFormat.TEXT)
                 .build();
+        App.LOGGER.info("API Key = {}, Model Name = {}, Response Format = {}",
+                this.apiKey != null ? this.apiKey : "null",
+                DEFAULT_MODEL_NAME,
+                this.responseFormat != null ? this.responseFormat : ResponseFormat.TEXT
+        );
     }
 
-    public String ask(@NotNull String question) {return this.model.chat(question);}
+    public String ask(@NotNull String question) {
+        App.LOGGER.info("Sent question = {}", question);
+        return this.model.chat(question);
+    }
 }
