@@ -1,4 +1,4 @@
-package com.github.Legotatsu1985.emr.ui.component;
+package com.github.Legotatsu1985.emr.ui.component.menubar;
 
 import com.github.Legotatsu1985.emr.App;
 import com.github.Legotatsu1985.emr.ui.Actions;
