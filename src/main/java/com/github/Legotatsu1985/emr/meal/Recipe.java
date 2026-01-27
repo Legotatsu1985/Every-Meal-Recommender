@@ -55,7 +55,7 @@ public class Recipe {
         this.responseRaw = this.gemini.ask(question);
         LOGGER.info("Raw response = {}", this.responseRaw);
         ObjectMapper mapper = new ObjectMapper();
-        this.responseRoot = mapper.readTree(this.responseRaw);
+        this.responseRoot = mapper.readTree(this.responseRaw != null ? this.responseRaw : null);
         this.setRecipeInfo();
     }
 
