@@ -27,11 +27,11 @@ public class SuggestionPanel extends JPanel implements Actions {
 
     private Recipe suggestedRecipe;
 
-    public SuggestionPanel(@NotNull Home home) {
+    public SuggestionPanel(@NotNull Object home) {
         super();
         this.setPreferredSize(new Dimension(400, 600));
         this.setLayout(null);
-        this.home = home;
+        this.home = (Home) home;
         build();
         setActionListeners();
     }
