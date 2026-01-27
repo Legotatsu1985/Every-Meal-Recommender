@@ -1,7 +1,8 @@
 package com.github.Legotatsu1985.emr.util;
 
 import com.formdev.flatlaf.*;
-import com.github.Legotatsu1985.emr.App;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Config {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Config.class);
     public static final String CFG_STR = "config.properties";
     public static final Path CFG_PATH = Paths.get(CFG_STR);
 
@@ -30,9 +32,9 @@ public class Config {
             }
             return;
         }
-        this.langCode = PropertyManager.getString("lang"); App.LOGGER.info("Lang Code = {}", this.langCode);
-        this.apiKey = PropertyManager.getString("apiKey"); App.LOGGER.info("API Key = {}", this.apiKey);
-        this.windowStyle = PropertyManager.getInt("windowStyle"); App.LOGGER.info("Window Style = {}", this.windowStyle);
+        this.langCode = PropertyManager.getString("lang"); LOGGER.info("Lang Code = {}", this.langCode);
+        this.apiKey = PropertyManager.getString("apiKey"); LOGGER.info("API Key = {}", this.apiKey);
+        this.windowStyle = PropertyManager.getInt("windowStyle"); LOGGER.info("Window Style = {}", this.windowStyle);
     }
 
     public String getLangCode() {return this.langCode;}

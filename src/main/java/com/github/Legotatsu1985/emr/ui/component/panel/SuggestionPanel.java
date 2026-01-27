@@ -4,12 +4,16 @@ import com.github.Legotatsu1985.emr.meal.Recipe;
 import com.github.Legotatsu1985.emr.ui.Actions;
 import com.github.Legotatsu1985.emr.ui.frame.Home;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class SuggestionPanel extends JPanel implements Actions {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SuggestionPanel.class);
+
     private JLabel ingredientInputLabel;
     private JTextField ingredientInputField;
     private JList<String> ingredientList;
@@ -82,6 +86,7 @@ public class SuggestionPanel extends JPanel implements Actions {
             this.ingredientInputField.setText(null); // Clear input field
             updateAllButtonStates();
         } else {
+            LOGGER.error("Invalid ingredient input: '{}'", ingredient);
             JOptionPane.showMessageDialog(
                     this,
                     "Please enter a valid ingredient.",

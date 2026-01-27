@@ -6,10 +6,13 @@ import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.chat.request.ResponseFormat;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 
 public class Gemini {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Gemini.class);
     private static final String DEFAULT_MODEL_NAME = "gemini-2.5-flash";
     private String apiKey;
     private ChatModel model;
@@ -22,10 +25,10 @@ public class Gemini {
                 this.responseFormat = responseFormat;
                 setModel();
             } else {
-                App.LOGGER.warn("API key is missing in the configuration file.");
+                LOGGER.warn("API key is missing in the configuration file.");
             }
         } else {
-            App.LOGGER.warn("The configuration file does not exist.");
+            LOGGER.warn("The configuration file does not exist.");
         }
     }
 
@@ -41,7 +44,7 @@ public class Gemini {
                 .modelName(DEFAULT_MODEL_NAME)
                 .responseFormat(this.responseFormat != null ? this.responseFormat : ResponseFormat.TEXT)
                 .build();
-        App.LOGGER.info("API Key = {}, Model Name = {}, Response Format = {}",
+        LOGGER.info("API Key = {}, Model Name = {}, Response Format = {}",
                 this.apiKey != null ? this.apiKey : "null",
                 DEFAULT_MODEL_NAME,
                 this.responseFormat != null ? this.responseFormat : ResponseFormat.TEXT
@@ -49,7 +52,7 @@ public class Gemini {
     }
 
     public String ask(@NotNull String question) {
-        App.LOGGER.info("Sent question = {}", question);
+        LOGGER.info("Sent question = {}", question);
         return this.model.chat(question);
     }
 }

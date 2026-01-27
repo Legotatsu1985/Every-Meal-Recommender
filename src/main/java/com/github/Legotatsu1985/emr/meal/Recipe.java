@@ -5,12 +5,17 @@ import com.github.Legotatsu1985.emr.ai.Gemini;
 import dev.langchain4j.model.chat.request.*;
 import dev.langchain4j.model.chat.request.json.*;
 import org.jetbrains.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.*;
 
 public class Recipe {
+    // Logger
+    private static final Logger LOGGER = LoggerFactory.getLogger(Recipe.class);
+
     // AI model
     private Gemini gemini;
     private ResponseFormat responseFormat;
@@ -49,7 +54,7 @@ public class Recipe {
         this.gemini = new Gemini(this.responseFormat);
         String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
         this.responseRaw = this.gemini.ask(question);
-        App.LOGGER.info("Raw response = {}", this.responseRaw);
+        LOGGER.info("Raw response = {}", this.responseRaw);
         ObjectMapper mapper = new ObjectMapper();
         this.responseRoot = mapper.readTree(this.responseRaw);
         this.setRecipeInfo();
@@ -57,9 +62,9 @@ public class Recipe {
 
     public void printResponseRaw() {
         if (this.responseRaw != null) {
-            System.out.println(this.responseRaw);
+            LOGGER.info("Response Raw: {}", this.responseRaw);
         } else {
-            System.err.println("Response data is null.");
+            LOGGER.error("Response data is null.");
         }
     }
 
@@ -84,7 +89,7 @@ public class Recipe {
                 this.steps.add(step.asString());
             }
         } else {
-            System.err.println("Response data is not available. Please call suggest() first.");
+            LOGGER.error("Response data is null.");
         }
     }
 
