@@ -1,6 +1,5 @@
 package com.github.Legotatsu1985.emr.meal;
 
-import com.github.Legotatsu1985.emr.App;
 import com.github.Legotatsu1985.emr.ai.Gemini;
 import dev.langchain4j.model.chat.request.*;
 import dev.langchain4j.model.chat.request.json.*;
@@ -27,7 +26,7 @@ public class Recipe {
     private String title;
     private int cookingTimeMinutes;
     private Map<String, Integer> ingredients;
-    private LinkedList<String> steps;
+    private List<String> steps;
     private int calories;
 
     private static final String QUESTION_TEMPLATE = "Suggest a recipe using the following ingredients: %s. " +
@@ -118,6 +117,6 @@ public class Recipe {
     public String getTitle() {return this.title;}
     public int getCookingTimeMinutes() {return this.cookingTimeMinutes;}
     public Map<String, Integer> getIngredients() {return this.ingredients;}
-    public LinkedList<String> getSteps() {return this.steps;}
+    public List<String> getSteps() {return this.steps;}
     public int getCalories() {return this.calories;}
 }
