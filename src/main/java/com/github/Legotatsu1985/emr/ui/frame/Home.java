@@ -51,6 +51,13 @@ public class Home extends JFrame implements Actions {
     public void setSuggestedRecipe(Recipe recipe) {this.suggestedRecipe = recipe;}
 
     public void showResultPanel() {
+        if (this.resultPanel != null) {
+            this.resultPanel.setVisible(false);
+            this.basePanel.remove(this.resultPanel);
+            this.resultPanel = null;
+            this.basePanel.revalidate();
+            this.basePanel.repaint();
+        }
         this.resultPanel = new ResultPanel(this.suggestedRecipe, this);
         this.resultPanel.setBounds(400, 0, 400, 600);
         this.basePanel.add(this.resultPanel);
