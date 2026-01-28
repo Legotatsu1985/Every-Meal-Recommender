@@ -48,17 +48,17 @@ public class SuggestionPanel extends JPanel implements Actions {
         this.addIngredientButton.setBounds(320, 10, 60, 30);
 
         this.removeIngredientButton = new JButton("Remove Selected");
-        this.removeIngredientButton.setBounds(10, 460, 180, 30);
+        this.removeIngredientButton.setBounds(10, 420, 180, 30);
 
         this.clearIngredientsButton = new JButton("Clear All");
-        this.clearIngredientsButton.setBounds(200, 460, 180, 30);
+        this.clearIngredientsButton.setBounds(200, 420, 180, 30);
 
         this.ingredientListModel = new DefaultListModel<>();
         this.ingredientList = new JList<>(ingredientListModel);
-        this.ingredientList.setBounds(10, 50, 370, 400);
+        this.ingredientList.setBounds(10, 50, 370, 360);
 
         this.suggestRecipeButton = new JButton("Suggest Recipe");
-        this.suggestRecipeButton.setBounds(10, 500, 370, 50);
+        this.suggestRecipeButton.setBounds(10, 460, 370, 50);
 
         this.add(ingredientInputLabel);
         this.add(ingredientInputField);
