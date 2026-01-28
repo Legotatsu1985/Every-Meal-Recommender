@@ -11,8 +11,10 @@ import javax.swing.*;
 public class Home extends JFrame implements Actions {
     private SuggestionPanel suggestionPanel;
     private ResultPanel resultPanel;
-    private JPanel basePanel;
+    private JPanel recipeRequestPanel;
+    private JPanel recipeManagingPanel;
     private HomeMenuBar menuBar;
+    private JTabbedPane mainTabbedPane;
 
     private Recipe suggestedRecipe;
 
@@ -28,8 +30,8 @@ public class Home extends JFrame implements Actions {
 
     private void build() {
         // Base Panel
-        this.basePanel = new JPanel();
-        this.basePanel.setLayout(null);
+        this.recipeRequestPanel = new JPanel();
+        this.recipeRequestPanel.setLayout(null);
 
         // Suggestion Panel
         this.suggestionPanel = new SuggestionPanel(this);
@@ -42,8 +44,13 @@ public class Home extends JFrame implements Actions {
 
         // Set layout and add components
         this.setJMenuBar(this.menuBar);
-        this.basePanel.add(this.suggestionPanel);
-        this.add(this.basePanel);
+        this.recipeRequestPanel.add(this.suggestionPanel);
+        this.add(this.recipeRequestPanel);
+
+        this.mainTabbedPane = new JTabbedPane();
+        this.mainTabbedPane.add("Requesting", this.recipeRequestPanel);
+        this.mainTabbedPane.add("Managing", new JPanel());
+        this.add(this.mainTabbedPane);
     }
 
     public void setActionListeners() {}
@@ -53,15 +60,15 @@ public class Home extends JFrame implements Actions {
     public void showResultPanel() {
         if (this.resultPanel != null) {
             this.resultPanel.setVisible(false);
-            this.basePanel.remove(this.resultPanel);
+            this.recipeRequestPanel.remove(this.resultPanel);
             this.resultPanel = null;
-            this.basePanel.revalidate();
-            this.basePanel.repaint();
+            this.recipeRequestPanel.revalidate();
+            this.recipeRequestPanel.repaint();
         }
         this.resultPanel = new ResultPanel(this.suggestedRecipe, this);
         this.resultPanel.setBounds(400, 0, 400, 600);
-        this.basePanel.add(this.resultPanel);
-        this.basePanel.revalidate();
-        this.basePanel.repaint();
+        this.recipeRequestPanel.add(this.resultPanel);
+        this.recipeRequestPanel.revalidate();
+        this.recipeRequestPanel.repaint();
     }
 }
