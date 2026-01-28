@@ -116,7 +116,8 @@ public class SuggestionPanel extends JPanel implements Actions {
         }
         this.suggestedRecipe = new Recipe();
         this.suggestedRecipe.setIngredients(ingredients).suggest();
-        setSuggestedRecipe();
+        this.home.setSuggestedRecipe(this.suggestedRecipe);
+        this.home.showResultPanel();
     }
 
     private void updateAllButtonStates() {
@@ -126,6 +127,4 @@ public class SuggestionPanel extends JPanel implements Actions {
     }
 
     public Recipe getSuggestedRecipe() {return this.suggestedRecipe;}
-
-    private void setSuggestedRecipe() {this.home.setSuggestedRecipe(this.suggestedRecipe);}
 }

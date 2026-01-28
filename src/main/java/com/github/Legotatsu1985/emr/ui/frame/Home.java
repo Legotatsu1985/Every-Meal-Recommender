@@ -52,7 +52,7 @@ public class Home extends JFrame implements Actions {
 
     public void showResultPanel() {
         this.resultPanel = new ResultPanel(this.suggestedRecipe, this);
-        this.resultPanel.setBounds(401, 0, 400, 600);
+        this.resultPanel.setBounds(400, 0, 400, 600);
         this.basePanel.add(this.resultPanel);
         this.basePanel.revalidate();
         this.basePanel.repaint();

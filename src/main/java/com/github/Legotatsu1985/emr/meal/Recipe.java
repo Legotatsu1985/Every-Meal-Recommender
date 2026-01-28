@@ -1,6 +1,7 @@
 package com.github.Legotatsu1985.emr.meal;
 
 import com.github.Legotatsu1985.emr.ai.Gemini;
+import com.github.Legotatsu1985.emr.util.FileLoader;
 import dev.langchain4j.model.chat.request.*;
 import dev.langchain4j.model.chat.request.json.*;
 import org.jetbrains.annotations.*;
@@ -52,16 +53,22 @@ public class Recipe {
         this.setResponseFormat();
         this.gemini = new Gemini(this.responseFormat);
         String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
-        this.responseRaw = this.gemini.ask(question);
-        LOGGER.info("Raw response = {}", this.responseRaw);
-        ObjectMapper mapper = new ObjectMapper();
-        this.responseRoot = mapper.readTree(this.responseRaw != null ? this.responseRaw : null);
-        this.setRecipeInfo();
+        // this.responseRaw = this.gemini.ask(question);
+        FileLoader fl = new FileLoader("src/main/resources/sample_recipe.json");
+        this.responseRaw = fl.load();
+        if (this.responseRaw != null) {
+            LOGGER.info("\n{}", this.responseRaw);
+            ObjectMapper mapper = new ObjectMapper();
+            this.responseRoot = mapper.readTree(this.responseRaw);
+            this.setRecipeInfo();
+        } else {
+            LOGGER.error("Response data is null.");
+        }
     }
 
     public void printResponseRaw() {
         if (this.responseRaw != null) {
-            LOGGER.info("Response Raw: {}", this.responseRaw);
+            LOGGER.info("\n{}", this.responseRaw);
         } else {
             LOGGER.error("Response data is null.");
         }
