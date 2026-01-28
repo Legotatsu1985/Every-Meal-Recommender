@@ -53,9 +53,9 @@ public class Recipe {
         this.setResponseFormat();
         this.gemini = new Gemini(this.responseFormat);
         String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
-        // this.responseRaw = this.gemini.ask(question);
-        FileLoader fl = new FileLoader("src/main/resources/sample_recipe.json");
-        this.responseRaw = fl.load();
+        this.responseRaw = this.gemini.ask(question);
+        /*FileLoader fl = new FileLoader("src/main/resources/sample_recipe.json");
+        this.responseRaw = fl.load();*/
         if (this.responseRaw != null) {
             LOGGER.info("\n{}", this.responseRaw);
             ObjectMapper mapper = new ObjectMapper();
