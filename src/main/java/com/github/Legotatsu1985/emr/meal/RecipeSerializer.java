@@ -3,9 +3,11 @@ package com.github.Legotatsu1985.emr.meal;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public class RecipeSerializer extends StdSerializer<Recipe> {
@@ -13,9 +15,8 @@ public class RecipeSerializer extends StdSerializer<Recipe> {
 
     @Override
     public void serialize(Recipe recipe, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        LocalDateTime now = LocalDateTime.now();
         gen.writeStartObject();
-        gen.writeStringField("date", now.toString()); // To avoid duplicate recipe entries
+        gen.writeStringField("date", getCurrentTimestamp()); // To avoid duplicate recipe entries
         gen.writeNumberField("calories", recipe.getCalories()); // Total calories
         gen.writeNumberField("cooking_time_minutes", recipe.getCookingTimeMinutes()); // Cooking time in minutes
         gen.writeArrayFieldStart("ingredients"); // Ingredients list
@@ -33,5 +34,10 @@ public class RecipeSerializer extends StdSerializer<Recipe> {
         }
         gen.writeEndArray();
         gen.writeEndObject();
+    }
+
+    private @NotNull String getCurrentTimestamp() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dtf.format(LocalDateTime.now());
     }
 }
