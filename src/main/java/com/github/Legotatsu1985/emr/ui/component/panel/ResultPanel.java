@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class ResultPanel extends JPanel {
+public class ResultPanel extends JPanel implements Actions {
     // Components
     private JLabel titleLabel;
     private JLabel caloriesLabel;
