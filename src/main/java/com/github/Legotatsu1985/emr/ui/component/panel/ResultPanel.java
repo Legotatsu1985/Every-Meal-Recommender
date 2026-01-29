@@ -20,8 +20,6 @@ public class ResultPanel extends JPanel implements Actions {
     private JLabel cookingTimeLabel;
     private JLabel ingredientTableLabel;
     private JLabel stepsTableLabel;
-    private JPanel ingredientTablePanel;
-    private JPanel stepsTablePanel;
     private JScrollPane ingredientTableScrollPane;
     private JScrollPane stepsTableScrollPane;
     private JTable ingredientTable;
@@ -43,8 +41,9 @@ public class ResultPanel extends JPanel implements Actions {
     private static final String[] STEPS_TABLE_COLUMNS = {"Step", "Instruction"};
 
     private Home home;
+    private boolean isSavable;
 
-    public ResultPanel(@NotNull Recipe recipe, @NotNull Object home) {
+    public ResultPanel(@NotNull Recipe recipe, @NotNull Object home, boolean isSavable) {
         super();
         this.setPreferredSize(new Dimension(400, 600));
         this.setLayout(null);
@@ -55,6 +54,7 @@ public class ResultPanel extends JPanel implements Actions {
         this.stepsList = recipe.getSteps();
         this.calories = recipe.getCalories();
         this.home = (Home) home;
+        this.isSavable = isSavable;
         build();
         setActionListeners();
     }
@@ -90,7 +90,7 @@ public class ResultPanel extends JPanel implements Actions {
         this.ingredientTableColumnModel.getColumn(0).setPreferredWidth(305);
         this.ingredientTableColumnModel.getColumn(1).setPreferredWidth(70);
         this.ingredientTableScrollPane = new JScrollPane(this.ingredientTable);
-        this.ingredientTableScrollPane.setBounds(0, 150, 380, 150);
+        this.ingredientTableScrollPane.setBounds(0, 145, 380, 150);
 
         // Steps Table
         this.stepsTableLabel = new JLabel("Steps");
@@ -108,13 +108,14 @@ public class ResultPanel extends JPanel implements Actions {
         this.stepsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.stepsTableColumnModel = (DefaultTableColumnModel) this.stepsTable.getColumnModel();
         this.stepsTableColumnModel.getColumn(0).setPreferredWidth(40);
-        this.stepsTableColumnModel.getColumn(1).setPreferredWidth(540);
+        this.stepsTableColumnModel.getColumn(1).setPreferredWidth(1040);
         this.stepsTableScrollPane = new JScrollPane(this.stepsTable);
-        this.stepsTableScrollPane.setBounds(0, 340, 380, 150);
+        this.stepsTableScrollPane.setBounds(0, 335, 380, 150);
 
         // Save Recipe Button
         this.saveRecipeButton = new JButton("Save Recipe");
-        this.saveRecipeButton.setBounds(140, 500, 100, 30);
+        this.saveRecipeButton.setBounds(140, 490, 100, 30);
+        this.saveRecipeButton.setEnabled(this.isSavable);
 
         this.add(this.titleLabel);
         this.add(this.cookingTimeLabel);
@@ -131,7 +132,7 @@ public class ResultPanel extends JPanel implements Actions {
             RecipeManager rm = new RecipeManager(this.recipe);
             rm.saveRecipe(true);
             this.saveRecipeButton.setEnabled(false);
-            JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this.home,
                     "Recipe Saved Successfully!",
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
