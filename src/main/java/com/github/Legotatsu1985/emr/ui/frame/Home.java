@@ -54,7 +54,15 @@ public class Home extends JFrame implements Actions {
         this.add(this.mainTabbedPane);
     }
 
-    public void setActionListeners() {}
+    public void setActionListeners() {
+        this.mainTabbedPane.addChangeListener(_ -> {
+            if (this.mainTabbedPane.getSelectedIndex() == 1) { // If Managing Tab is selected
+                this.recipesPanel.refreshRecipes();
+                this.recipesPanel.revalidate();
+                this.recipesPanel.repaint();
+            }
+        });
+    }
 
     public void setSuggestedRecipe(Recipe recipe) {this.suggestedRecipe = recipe;}
 
