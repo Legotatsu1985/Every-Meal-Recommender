@@ -5,6 +5,7 @@ target/
 .kotlin
 *.properties
 *.jsonl
+out/artifacts/*
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
