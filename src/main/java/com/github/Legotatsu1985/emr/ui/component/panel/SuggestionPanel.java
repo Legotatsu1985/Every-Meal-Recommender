@@ -120,7 +120,19 @@ public class SuggestionPanel extends JPanel implements Actions {
             ingredients.add(this.ingredientListModel.getElementAt(i));
         }
         this.suggestedRecipe = new Recipe();
-        this.suggestedRecipe.setIngredients(ingredients).suggest();
+        try {
+            this.suggestedRecipe.setIngredients(ingredients).suggest();
+        } catch (Exception ex) {
+            LOGGER.error("Error suggesting recipe: ", ex);
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            updateAllButtonStates();
+            return;
+        }
         this.home.setSuggestedRecipe(this.suggestedRecipe);
         this.home.showResultPanel();
         updateAllButtonStates();

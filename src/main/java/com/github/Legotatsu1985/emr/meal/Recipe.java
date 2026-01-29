@@ -50,7 +50,7 @@ public class Recipe {
         return this;
     }
 
-    public void suggest() {
+    public void suggest() throws Exception {
         this.setResponseFormat();
         this.gemini = new Gemini(this.responseFormat);
         String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
