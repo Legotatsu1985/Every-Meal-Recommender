@@ -1,27 +1,31 @@
 {
-  "calories": 100,
-  "cooking_time_minutes": 10,
+  "calories": 420,
+  "cooking_time_minutes": 12,
   "ingredients": [
     {
-      "count": 1,
-      "ingredient": "egg"
+      "count": 2,
+      "ingredient": "eggs"
     },
     {
       "count": 2,
       "ingredient": "slices of bread"
     },
     {
-      "count": 2,
-      "ingredient": "slices of cheese"
+      "count": 1,
+      "ingredient": "tablespoon of mayonnaise"
+    },
+    {
+      "count": 1,
+      "ingredient": "tablespoon of ketchup (optional)"
     }
   ],
-  "recipe": "Quick Cheese and Egg Sandwich",
+  "recipe": "Quick Egg Salad Sandwich",
   "steps": [
-    "Toast the bread slices until golden brown.",
-    "Fry the egg in a non-stick pan until the yolk is cooked to your liking.",
-    "Place the fried egg on one slice of toasted bread.",
-    "Add the cheese slices on top of the egg.",
-    "Top with the second slice of bread to complete the sandwich.",
-    "Serve immediately while the cheese is still melty."
+    "Hard boil two eggs. Once cooked, cool them under cold water, peel, and chop them into small pieces.",
+    "Toast two slices of bread to your desired crispness.",
+    "In a small bowl, combine the chopped eggs with mayonnaise, mixing well.",
+    "Spread the egg mixture evenly over one slice of toasted bread.",
+    "If desired, drizzle ketchup over the egg mixture.",
+    "Place the second slice of toasted bread on top to complete the sandwich. Serve immediately."
   ]
 }
