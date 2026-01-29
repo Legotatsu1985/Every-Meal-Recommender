@@ -51,7 +51,13 @@ public class Gemini {
         );
     }
 
-    public String ask(@NotNull String question) {
+    public String ask(@NotNull String question) throws IllegalStateException {
+        if (this.apiKey == null || this.apiKey.isEmpty()) {
+            throw new IllegalStateException("API key is not set.");
+        }
+        if (this.model == null) {
+            throw new IllegalStateException("Model is not set.");
+        }
         LOGGER.info("Sent question = {}", question);
         return this.model.chat(question);
     }
