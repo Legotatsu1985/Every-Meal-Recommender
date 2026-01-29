@@ -76,7 +76,12 @@ public class SuggestionPanel extends JPanel implements Actions {
         this.ingredientInputField.addActionListener(_ -> addIngredient());
         this.removeIngredientButton.addActionListener(_ -> removeIngredient());
         this.clearIngredientsButton.addActionListener(_ -> clearIngredients());
-        this.suggestRecipeButton.addActionListener(_ -> suggestRecipe());
+        this.suggestRecipeButton.addActionListener(_ -> {
+            this.removeIngredientButton.setEnabled(false);
+            this.clearIngredientsButton.setEnabled(false);
+            this.suggestRecipeButton.setEnabled(false);
+            suggestRecipe();
+        });
     }
 
     private void addIngredient() {
@@ -118,6 +123,7 @@ public class SuggestionPanel extends JPanel implements Actions {
         this.suggestedRecipe.setIngredients(ingredients).suggest();
         this.home.setSuggestedRecipe(this.suggestedRecipe);
         this.home.showResultPanel();
+        updateAllButtonStates();
     }
 
     private void updateAllButtonStates() {
