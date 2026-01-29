@@ -1,6 +1,8 @@
 package com.github.Legotatsu1985.emr.ui.component.panel;
 
 import com.github.Legotatsu1985.emr.meal.Recipe;
+import com.github.Legotatsu1985.emr.meal.RecipeManager;
+import com.github.Legotatsu1985.emr.ui.Actions;
 import com.github.Legotatsu1985.emr.ui.frame.Home;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +30,10 @@ public class ResultPanel extends JPanel implements Actions {
     private DefaultTableColumnModel stepsTableColumnModel;
     private DefaultTableModel ingredientTableModel;
     private DefaultTableModel stepsTableModel;
+    private JButton saveRecipeButton;
 
     // Recipe data
+    private Recipe recipe;
     private String title;
     private int cookingTimeMinutes;
     private Map<String, Integer> ingredientsMap; // <name, count>
@@ -44,6 +48,7 @@ public class ResultPanel extends JPanel implements Actions {
         super();
         this.setPreferredSize(new Dimension(400, 600));
         this.setLayout(null);
+        this.recipe = recipe;
         this.title = recipe.getTitle();
         this.cookingTimeMinutes = recipe.getCookingTimeMinutes();
         this.ingredientsMap = recipe.getIngredients();
@@ -51,6 +56,7 @@ public class ResultPanel extends JPanel implements Actions {
         this.calories = recipe.getCalories();
         this.home = (Home) home;
         build();
+        setActionListeners();
     }
 
     private void build() {
@@ -106,6 +112,10 @@ public class ResultPanel extends JPanel implements Actions {
         this.stepsTableScrollPane = new JScrollPane(this.stepsTable);
         this.stepsTableScrollPane.setBounds(0, 340, 380, 150);
 
+        // Save Recipe Button
+        this.saveRecipeButton = new JButton("Save Recipe");
+        this.saveRecipeButton.setBounds(140, 500, 100, 30);
+
         this.add(this.titleLabel);
         this.add(this.cookingTimeLabel);
         this.add(this.caloriesLabel);
@@ -113,5 +123,19 @@ public class ResultPanel extends JPanel implements Actions {
         this.add(this.ingredientTableScrollPane);
         this.add(this.stepsTableLabel);
         this.add(this.stepsTableScrollPane);
+        this.add(this.saveRecipeButton);
+    }
+
+    public void setActionListeners() {
+        this.saveRecipeButton.addActionListener(_ -> {
+            RecipeManager rm = new RecipeManager(this.recipe);
+            rm.saveRecipe(true);
+            this.saveRecipeButton.setEnabled(false);
+            JOptionPane.showMessageDialog(this,
+                    "Recipe Saved Successfully!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.home.disposeResultPanel();
+        });
     }
 }
