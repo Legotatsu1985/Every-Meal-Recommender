@@ -74,7 +74,7 @@ public class Home extends JFrame implements Actions {
             this.recipeRequestPanel.revalidate();
             this.recipeRequestPanel.repaint();
         }
-        this.resultPanel = new ResultPanel(this.suggestedRecipe, this);
+        this.resultPanel = new ResultPanel(this.suggestedRecipe, this, true);
         this.resultPanel.setBounds(400, 0, 400, 600);
         this.recipeRequestPanel.add(this.resultPanel);
         this.recipeRequestPanel.revalidate();
