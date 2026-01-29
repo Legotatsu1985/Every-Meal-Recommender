@@ -125,7 +125,7 @@ public class SuggestionPanel extends JPanel implements Actions {
         } catch (Exception ex) {
             LOGGER.error("Error suggesting recipe: ", ex);
             JOptionPane.showMessageDialog(
-                    this,
+                    this.home,
                     ex.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE
