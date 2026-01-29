@@ -1,7 +1,6 @@
 package com.github.Legotatsu1985.emr.meal;
 
 import com.github.Legotatsu1985.emr.ai.Gemini;
-import com.github.Legotatsu1985.emr.util.FileLoader;
 import dev.langchain4j.model.chat.request.*;
 import dev.langchain4j.model.chat.request.json.*;
 import org.jetbrains.annotations.*;

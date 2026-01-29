@@ -8,19 +8,18 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class FileLoader {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileLoader.class);
+public class FileEditor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileEditor.class);
 
     private String filePath;
     private String rawString;
 
-    public FileLoader(@NotNull String filePath) {
+    public FileEditor(@NotNull String filePath) {
         this.filePath = filePath;
         this.rawString = null;
     }
 
-    @Nullable
-    public String load() {
+    public FileEditor load() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(this.filePath), StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
             String line;
@@ -28,10 +27,27 @@ public class FileLoader {
                 sb.append(line).append("\n");
             }
             this.rawString = sb.toString();
-            return this.rawString;
+            return this;
         } catch (IOException e) {
             LOGGER.error("Failed to load JSON file: {}", e.getMessage());
         }
-        return null;
+        return this;
+    }
+
+    public void write(@NotNull String str, boolean append) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePath, append), StandardCharsets.UTF_8))) {
+            bw.write(str);
+        } catch (IOException e) {
+            LOGGER.error("Failed to write to file: {}", e.getMessage());
+        }
+    }
+
+    public @Nullable String getString() {
+        if (this.rawString != null) {
+            return this.rawString;
+        } else {
+            LOGGER.error("Raw string is null. Make sure to call load() before getString().");
+            return null;
+        }
     }
 }
