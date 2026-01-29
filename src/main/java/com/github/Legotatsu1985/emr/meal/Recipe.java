@@ -1,6 +1,7 @@
 package com.github.Legotatsu1985.emr.meal;
 
 import com.github.Legotatsu1985.emr.ai.Gemini;
+import com.github.Legotatsu1985.emr.util.FileEditor;
 import dev.langchain4j.model.chat.request.*;
 import dev.langchain4j.model.chat.request.json.*;
 import org.jetbrains.annotations.*;
@@ -53,8 +54,8 @@ public class Recipe {
         this.gemini = new Gemini(this.responseFormat);
         String question = String.format(QUESTION_TEMPLATE, String.join(", ", this.requestedIngredients));
         this.responseRaw = this.gemini.ask(question);
-        /*FileLoader fl = new FileLoader("src/main/resources/sample_recipe.json");
-        this.responseRaw = fl.load();*/
+        /*FileEditor fe = new FileEditor("src/main/resources/sample_recipe.json");
+        this.responseRaw = fe.load().getString();*/
         if (this.responseRaw != null) {
             LOGGER.info("\n{}", this.responseRaw);
             ObjectMapper mapper = new ObjectMapper();
