@@ -71,4 +71,14 @@ public class Home extends JFrame implements Actions {
         this.recipeRequestPanel.revalidate();
         this.recipeRequestPanel.repaint();
     }
+
+    public void disposeResultPanel() {
+        if (this.resultPanel != null) {
+            this.resultPanel.setVisible(false);
+            this.recipeRequestPanel.remove(this.resultPanel);
+            this.resultPanel = null;
+            this.recipeRequestPanel.revalidate();
+            this.recipeRequestPanel.repaint();
+        }
+    }
 }
