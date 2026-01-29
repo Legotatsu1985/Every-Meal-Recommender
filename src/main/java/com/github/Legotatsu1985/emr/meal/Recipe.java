@@ -24,6 +24,7 @@ public class Recipe {
     // Recipe data
     private ArrayList<String> requestedIngredients;
     private JsonNode responseRoot;
+    private String createdDate;
     private String title;
     private int cookingTimeMinutes;
     private Map<String, Integer> ingredients;
@@ -121,9 +122,17 @@ public class Recipe {
                 .build();
     }
 
+    public @Nullable String getDate() {return this.createdDate;}
     public String getTitle() {return this.title;}
     public int getCookingTimeMinutes() {return this.cookingTimeMinutes;}
     public Map<String, Integer> getIngredients() {return this.ingredients;}
     public List<String> getSteps() {return this.steps;}
     public int getCalories() {return this.calories;}
+
+    public void setDate(@NotNull String date) {this.createdDate = date;}
+    public void setTitle(@NotNull String title) {this.title = title;}
+    public void setCookingTimeMinutes(int minutes) {this.cookingTimeMinutes = minutes;}
+    public void setIngredients(@NotNull Map<String, Integer> ingredients) {this.ingredients = ingredients;}
+    public void setSteps(@NotNull List<String> steps) {this.steps = steps;}
+    public void setCalories(int calories) {this.calories = calories;}
 }
