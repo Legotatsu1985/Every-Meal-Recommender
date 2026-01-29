@@ -3,16 +3,15 @@ package com.github.Legotatsu1985.emr.ui.frame;
 import com.github.Legotatsu1985.emr.meal.Recipe;
 import com.github.Legotatsu1985.emr.ui.Actions;
 import com.github.Legotatsu1985.emr.ui.component.menubar.HomeMenuBar;
-import com.github.Legotatsu1985.emr.ui.component.panel.ResultPanel;
-import com.github.Legotatsu1985.emr.ui.component.panel.SuggestionPanel;
+import com.github.Legotatsu1985.emr.ui.component.panel.*;
 
 import javax.swing.*;
 
 public class Home extends JFrame implements Actions {
     private SuggestionPanel suggestionPanel;
+    private RecipesPanel recipesPanel;
     private ResultPanel resultPanel;
     private JPanel recipeRequestPanel;
-    private JPanel recipeManagingPanel;
     private HomeMenuBar menuBar;
     private JTabbedPane mainTabbedPane;
 
@@ -29,7 +28,7 @@ public class Home extends JFrame implements Actions {
     }
 
     private void build() {
-        // Base Panel
+        // Recipe Request Panel
         this.recipeRequestPanel = new JPanel();
         this.recipeRequestPanel.setLayout(null);
 
@@ -37,19 +36,21 @@ public class Home extends JFrame implements Actions {
         this.suggestionPanel = new SuggestionPanel(this);
         this.suggestionPanel.setBounds(0, 0, 400, 600);
 
-        // Result Panel
+        // Recipes Panel
+        this.recipesPanel = new RecipesPanel(this);
+        this.recipesPanel.setBounds(0, 0, 800, 600);
 
         // Menu Bar
         this.menuBar = new HomeMenuBar();
-
-        // Set layout and add components
         this.setJMenuBar(this.menuBar);
-        this.recipeRequestPanel.add(this.suggestionPanel);
-        this.add(this.recipeRequestPanel);
 
+        // Panels in Tabbed Pane
+        this.recipeRequestPanel.add(this.suggestionPanel);
+
+        // Tabbed Pane
         this.mainTabbedPane = new JTabbedPane();
         this.mainTabbedPane.add("Requesting", this.recipeRequestPanel);
-        this.mainTabbedPane.add("Managing", new JPanel());
+        this.mainTabbedPane.add("Managing", this.recipesPanel);
         this.add(this.mainTabbedPane);
     }
 
