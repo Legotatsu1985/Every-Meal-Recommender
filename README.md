@@ -3,6 +3,8 @@
 )](https://github.com/Legotatsu1985/Every-Meal-Recommender/commits/master/)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/Legotatsu1985/Every-Meal-Recommender
 )](https://github.com/Legotatsu1985/Every-Meal-Recommender/commits/master/)
+![GitHub Downloads Count](https://img.shields.io/github/downloads/Legotatsu1985/Every-Meal-Recommender/total
+)
 # What is this?
 This app can suggest your desired meal with requested ingredients you've typed in.<br>
 The suggestion logic is using "Google AI Gemini". It provides easy and reachable meal with cooking time, total calories, required ingredients, and whole steps to cook.<br>
